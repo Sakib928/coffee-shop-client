@@ -1,10 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 import "./App.css";
 import CoffeeCard from "./components/CoffeeCard";
+import { useState } from "react";
 
 function App() {
-  const coffees = useLoaderData();
-  console.log(coffees);
+  const allCoffees = useLoaderData();
+  // console.log(allCoffees);
+  const [coffees, setCoffees] = useState(allCoffees);
+
   return (
     <>
       <h1 className="text-4xl text-center">
@@ -12,7 +15,14 @@ function App() {
       </h1>
       <div className="grid md:grid-cols-2">
         {coffees.map((coffee) => {
-          return <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>;
+          return (
+            <CoffeeCard
+              key={coffee._id}
+              coffees={coffees}
+              setCoffees={setCoffees}
+              coffee={coffee}
+            ></CoffeeCard>
+          );
         })}
       </div>
     </>
